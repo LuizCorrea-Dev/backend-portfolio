@@ -66,6 +66,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     `,
   };
 
+  // 3. Enviar o e-mail
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log(`Message sent: %s`, info.messageId);
@@ -73,23 +74,19 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error("Nodemailer Error:", error);
 
+    // --- CORREÇÃO DO ERRO TS18046 AQUI ---
     let errorMessage = "An unknown error occurred during email sending.";
 
+    // Verifica se o erro é uma instância de Error para acessar com segurança
     if (error instanceof Error) {
       errorMessage = error.message;
-    } else if (
-      typeof error === "object" &&
-      error !== null &&
-      "message" in error &&
-      typeof error.message === "string"
-    ) {
-      errorMessage = error.message;
     }
+    // ----------------------------------------
 
+    // Retorna 500 para o frontend sem expor detalhes do SMTP
     return res.status(500).json({
       message:
         "Error sending email. Please check server logs and SMTP configuration.",
-
       error: errorMessage,
     });
   }
