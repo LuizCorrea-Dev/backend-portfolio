@@ -1,0 +1,22 @@
+{
+  "name": "backend-portfolio",
+  "version": "1.0.0",
+  "description": "Serverless API for handling password reset flow for portfolio admin.",
+  "main": "api/send-reset-pin.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Luiz Correa [@Rootszera]",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "nodemailer": "^7.0.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.15",
+    "@vercel/node": "^2.3.0",
+    "typescript": "^5.4.5"
+  }
+}
