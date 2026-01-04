@@ -74,14 +74,14 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error("Nodemailer Error:", error);
 
-    // --- CORREÇÃO DO ERRO TS18046 AQUI ---
+    // --- CORREÇÃO DO TS18046 AQUI ---
     let errorMessage = "An unknown error occurred during email sending.";
 
     // Verifica se o erro é uma instância de Error para acessar com segurança
     if (error instanceof Error) {
       errorMessage = error.message;
     }
-    // ----------------------------------------
+    // ---------------------------------
 
     // Retorna 500 para o frontend sem expor detalhes do SMTP
     return res.status(500).json({
